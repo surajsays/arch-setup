@@ -1,0 +1,39 @@
+# theme = "material_deep_ocean"
+#theme = "hex_lavender"
+#theme = "catppuccin_frappe"
+theme = "lapis_aquamarine"
+
+
+[editor.soft-wrap]
+enable = true
+
+
+
+
+
+
+[keys.insert]
+
+"C-[" = "normal_mode"
+"C-b" = "normal_mode"  # Use Ctrl+b to switch to normal mode
+
+"C-s" = ":w" #save the file in insert mode 
+
+
+[keys.normal]
+C-g = [":new",":insert-output lazygit",":buffer-close",":redraw"]
+"C-]" = "normal_mode"
+
+ 
+
+[editor]
+clipboard-provider = "x-clip"
+
+
+
+#you can delete this just an experiment
+[keys.select]
+
+"C-[" = "normal_mode"
+
+

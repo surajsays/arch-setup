@@ -1,0 +1,9 @@
+[Default Applications]
+application/pdf=org.gnome.Evince.desktop
+image/svg+xml=feh.desktop
+video/webm=mpv.desktop
+
+[Added Associations]
+application/pdf=org.gnome.Evince.desktop;
+image/svg+xml=feh.desktop;
+video/webm=mpv.desktop;

@@ -1,0 +1,36 @@
+mod key  =  windows key 
+
+
+
+open terminal with                          mod + enter
+close any window                            mod + q
+
+open application menu with                  mod + d
+
+switch workplaces                           mod + 1 2 3 4 5 6 7 8 9 0
+swith active window to another workplace    mod + shift + 1 2 3 4 5 6 7 8 9 0
+toggle floating window with                 mod + shift + space
+resize window                               mod + r      and press arrow keys  again press mod + r to exit resize mode
+
+switching between windows                   mod + arrow keys     or    mod + j  k  l  ;   use any of this keys
+increase gap between windows                mod + shift +  plus or minus key
+  
+
+
+
+
+
+
+open power menu                            mod + shift + e        or use  icon of power in top right corner 
+open scripts menu                          ctrl + mod + s         or use icon of power in top right corner  click-right
+change randome wallpaper with              ctrl + mod + w
+
+toggle night mode by right clicking on first top right icon in polybar ,use same icon to change wallpaper click left 
+
+
+you can use both Esc key and               ctrl + [                // to escape, works in rofi menu and helix may be works in other places to i dont know
+ 
+
+
+
+keep you mouse away bye 

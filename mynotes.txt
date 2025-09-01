@@ -1,0 +1,266 @@
+I write this notes for reffrence  and yes they are not perfect
+
+#On Arch, you can save a list of installed packages:
+
+pacman -Qqe > ~/Pictures/arch-packages.txt
+
+#Later, you can reinstall everything with:
+
+sudo pacman -S --needed - < arch-packages.txt
+
+## use pacman -Qi polybar
+ polybar is programe name. use specific name to get information about installed program
+
+##use lsblk and lsblk f to see disks info
+
+##to mount other disks on file manager  use command udisksctl mount -b /dev/sdb2
+replace with specific block
+
+======================================================================================
+
+
+##programs i have installed on my pc
+ firefox nemo helix ranger(terminal file manager)
+
+
+yay -S python-i3ipc   //required important 
+
+
+				necessary=========
+rofi picom feh networkmanager  polybar playerctl dunst pavucontrol redshift
+yay git pipewire  gnome-screenshot zenity ffmpeg yt-dlp
+
+				==================
+noveau nvidia drivers for nvidia or priority drivers  
+
+fastfetch nano kitty document-viewer(Evience) 
+lazygit  logseq htop pipewire 
+playerctl, inkscape -for writing pdfs and svg  
+
+sudo pacman -S cronie ,  //no need to install if you do not want to schedule task
+
+
+ ----required packages 
+sudo pacman -S zenity
+sudo pacman -S mpv
+sudo pacman -S mpv-mpris
+sudo pacman -S yt-dlp
+sudo pacman -S materia-gtk-theme
+sudo pacman -S gtk-engines gtk-engine-murrine
+sudo pacman -S gnome-themes-extra
+sudo pacman -S gnome-screenshot,
+ 
+
+
+## fonts --
+1)firacode
+2)jetbrain mono
+3)fontawesome
+
+====================================================================================
+
+## polybar
+pacman -Qi polybar
+	make sure i have installed all programs installed used for this setup
+	
+sudo pacman -S ttf-font-awesome 
+
+chomd +x ~/.config/polybar/scripts/*.sh
+chmod +x ~/.config/polybar/*.sh
+
+================================================================================
+
+## picom compositor
+killall picom
+picom --config ~/.config/picom/picom.conf --experimental-backends -b
+picom &
+
+
+
+
+====================================================================================
+## notes for nemo file manager or anyother file manager 
+
+   open filepath  in terminal 
+
+   gsettings set org.cinnamon.desktop.default-applications.terminal exec 'kitty'
+   gsettings set org.cinnamon.desktop.default-applications.terminal exec-arg '-e'
+
+
+        extra settings to resolve themes problems
+    	sudo pacman -S materia-gtk-theme
+
+    	checkk which theme is setup for gtk
+		gsettings get org.gnome.desktop.interface gtk-theme
+        gsettings set org.gnome.desktop.interface gtk-theme "Materia-dark"
+~/.xprofile   bash - export GTK_THEME=Materia-dark   //.xprofile because using i3wm
+
+======================================================================================
+
+
+#audio codecs
+	sudo pacman -S gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly faad2
+
+
+
+for mpd quick fixes
+	mpd cant auto recognize file codec if extension is wrong
+	if m4a file has mp3 extension it will not work
+
+    # this script will rename those files if found m4a files has mp3 or other extensioni
+
+
+####	ffprobe is cool learn more about it 
+
+	
+
+		###### bash script
+	find ~/Music -type f -iname "*.mp3" \
+  -exec bash -c '
+    for file; do
+      codec=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name \
+                      -of default=nw=1:nk=1 "$file")
+      if [[ "$codec" == "aac" ]]; then
+        mv "$file" "${file%.mp3}.m4a"
+        echo "Renamed: $file → ${file%.mp3}.m4a"
+      fi
+    done
+  ' bash {} +
+
+
+=====================================================================================
+
+
+
+
+
+
+
+fixing problem for files not opening with kitty plus helix insted opening with xterm plus helix
+
+. Set Kitty as the default terminal for apps
+
+xdg-mime default kitty.desktop x-scheme-handler/terminal
+
+mkdir -p ~/.local/share/applications
+cp /usr/share/applications/helix.desktop ~/.local/share/applications/
+
+
+make this changes in helix.desktop file (~/.local/share/applications/helix.desktop
+)
+	Exec=kitty -e helix %F
+	Terminal=false
+
+. Refreshed the desktop database
+
+update-desktop-database ~/.local/share/applications
+
+This makes your DE aware of the updated .desktop file.
+
+
+
+======================================================================================
+
+
+
+### change lightdm background
+
+
+/usr/share/pixmaps/
+
+Example:
+
+sudo cp $HOME/Pictures/Wallpapers/field.jpeg /usr/share/pixmaps/
+
+sudo chmod 644 /usr/share/pixmaps/field.jpeg
+
+and then set:
+
+sudo nano /etc/lightdm/lightdm-gtk-greeter.conf
+
+background=/usr/share/pixmaps/field.jpeg
+
+sudo systemctl restart lightdm
+
+
+
+#####===============if this does not fixed the issued
+	1️⃣ Find out what greeters are installed
+Run:
+
+pacman -Q | grep greeter
+
+If you see lightdm-gtk-greeter in the list, we can set it as default.
+
+2️⃣ Set the greeter in LightDM
+Edit the config file:
+
+sudo nano /etc/lightdm/lightdm.conf
+
+Find the line:
+
+#greeter-session=example-gtk-gnome
+
+Replace it with:
+
+greeter-session=lightdm-gtk-greeter
+
+(save with CTRL+O, ENTER, then exit with CTRL+X).
+
+3️⃣ Edit the GTK greeter wallpaper config
+
+sudo nano /etc/lightdm/lightdm-gtk-greeter.conf
+
+Add or change:
+
+[greeter]
+background=/usr/share/pixmaps/field.jpeg
+
+4️⃣ Restart LightDM
+
+sudo systemctl restart lightdm
+
+===================================================================
+
+
+	# Additional fonts i have installed 
+		sudo pacman -S ttf-dejavu ttf-liberation
+		sudo pacman -S noto-fonts noto-fonts-emoji
+
+
+
+
+
+
+
+
+
+=======================================================================================
+
+
+##adapting same environment for ubuntu 
+
+for ubuntu 
+
+
+sudo apt install  i3 picom polybar rofi redshift playerctl
+
+##autotyling 
+
+	sudo apt install python3venv python3-full
+	
+	##create virtual environment 
+	mkdir ~/myenvs
+	cd ~/myenvs
+	python3 -m venv myenv
+	
+	
+	## activate vertual environment 
+	bash
+	myenv/bin/activate
+
+	pip install i3ipc
+
+
+	## modify the i3 config file for autotyling 
+	exec_always --no-startup-id $HOME/myenvs/myenv/bin/python ~/.config/i3/autotiling/autotiling.py

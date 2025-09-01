@@ -1,0 +1,49 @@
+ du -h --max-depth=1 ~/.cache //check which file took how much storae inside cache di..
+yay -Sc  //This option stands for "clean," and it specifically removes cached packages that are no longer installed o
+
+sudo pacman -Scc
+sudo pacman -Syy //to upgrade system 
+
+
+
+
+
+========================================================================
+	 lsblk -f // volumes/disks info
+	udisksctl mount -b /dev/sdb2       to mount volume sdb2
+
+
+	fixed for volumes not mounting properly
+	sudo pacman -S ntfs-3g      //install it if not installed 
+
+	sudo ntfsfix /dev/sdb2
+
+	if still not works
+
+	sudo ntfsfix -d/dev/sdb2
+
+
+=======================================================================
+
+
+
+
+
+
+
+
+
+
+
+random packages i have installed 
+
+
+
+
+
+
+
+
+	
+
+

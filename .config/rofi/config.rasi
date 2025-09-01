@@ -1,0 +1,57 @@
+//@theme "/home/.config/rofi/themes/everforest.rasi"
+@theme "$HOME/.config/rofi/themes/squared-nord.rasi"
+
+* {
+    bg4: #2D353BAA;
+    bg5: #9cadabc2;
+    bg6: #7A879059;
+    bg7: #0f1214ff;
+    fg4: #C4C4C4;
+}
+
+
+
+configuration {
+    show-icons: true;
+    drun-display-format: "{name}";
+}
+
+
+
+
+
+configuration {
+    show-icons: true;
+}
+
+
+window {
+    background-color: @bg4;
+    border: 3px;
+    border-color: @bg5;
+}
+
+inputbar {
+    background-color: @bg7;
+    border-color: @bg5;
+}
+
+entry {
+    placeholder-color: @fg4;
+}
+
+listview {
+    fixed-height: true;
+}
+
+element normal active {
+    text-color: @bg5;
+}
+
+element selected normal, element selected active {
+    background-color:   @bg5;
+}
+
+prompt {
+    enabled: false;
+}

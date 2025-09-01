@@ -1,0 +1,134 @@
+
+how i fix drivers issue for nvidia gt710 for old 470xx drivers nouveau also works 
+
+
+
+
+Edit your pacman configuration:
+	sudo nano /etc/pacman.conf
+
+	Scroll down to the section:
+	#[multilib]
+	#Include = /etc/pacman.d/mirrorlist    //uncomment this line
+
+
+⚠️ Important
+
+If you already have nouveau installed, remove it first to avoid conflicts:
+
+	sudo pacman -R xf86-video-nouveau
+
+
+
+
+
+sudo pacman -S linux-headers
+
+
+yay -S nvidia-470xx-dkms nvidia-470xx-utils //drivers for nvidia gt710
+
+
+
+
+. Check if nouveau is still active:
+	lsmod | grep nouveau
+
+
+Create /etc/modprobe.d/blacklist-nouveau.conf with:
+	blacklist nouveau
+	options nouveau modeset=0
+
+Then rebuild initramfs:
+	sudo mkinitcpio -P
+
+
+
+
+Blacklist Nouveau (open-source driver, conflicts with NVIDIA)
+	echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+
+
+
+Initramfs update:
+	sudo mkinitcpio -P
+
+
+
+
+
+
+
+
+
+
+First, check your kernel version:
+	uname -r
+
+
+Now list what NVIDIA DKMS sources are installed:
+	ls /usr/src/ | grep nvidia
+You should see something like:
+	nvidia-470.256.02
+
+
+
+
+sudo pacman -S linux-headers
+	sudo pacman -S linux-headers 
+
+
+Install the DKMS module for your kernel
+	sudo dkms install nvidia/470.256.02 -k $(uname -r)
+
+[suraj@archlinux ~]$ dkms status
+nvidia/470.256.02, 6.16.3-arch1-1, x86_64: installed
+
+Finally, load the module:
+	sudo modprobe nvidia
+
+and confirm with:
+	lsmod | grep nvidia
+	nvidia-smi
+
+
+
+
+
+Fix: Force Xorg to use NVIDIA   //i am using i3 x11 environment 
+
+Create a config file:
+	`bash`
+	sudo nano /etc/X11/xorg.conf.d/20-nvidia.conf
+	
+put this inside
+
+	`conf`
+	Section "Device"
+   	    Identifier "Nvidia Card"
+    	Driver "nvidia"
+   	    VendorName "NVIDIA Corporation"
+    	Option "AllowEmptyInitialConfiguration"
+	EndSection
+
+	
+Check if Xorg is using NVIDIA
+	cat /var/log/Xorg.0.log | grep -i nvidia
+
+
+
+
+
+
+
+[suraj@archlinux ~]$ lsmod | grep nvidia
+lsmod | grep nouveau
+nvidia_drm             86016  0
+nvidia_uvm           2752512  0
+nvidia_modeset       1515520  4 nvidia_drm
+video                  81920  1 nvidia_modeset
+nvidia              40755200  236 nvidia_uvm,nvidia_modeset
+[suraj@archlinux ~]$
+
+You should see nvidia loaded.
+
+If nouveau is loaded, it’s still using the open-source driver → blacklist it.
