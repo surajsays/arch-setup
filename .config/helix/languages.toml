@@ -1,8 +1,40 @@
-# Define the TypeScript Language Server once
+# ---------------------
+# Language Servers
+# ---------------------
+
+# Rust
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+# TypeScript / JavaScript
 [language-server.typescript-language-server]
 command = "typescript-language-server"
 args = ["--stdio"]
 
+# HTML / CSS (from vscode-langservers-extracted)
+[language-server.vscode-html-language-server]
+command = "vscode-html-language-server"
+args = ["--stdio"]
+
+[language-server.vscode-css-language-server]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+
+# Java
+[language-server.jdtls]
+command = "jdtls"
+args = ["-data", "/home/suraj/.cache/jdtls/workspace"]
+
+# Tailwind
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+# ---------------------
+# Languages
+# ---------------------
+
+# Rust
 [[language]]
 name = "rust"
 scope = "source.rust"
@@ -24,7 +56,8 @@ persistent-diagnostic-sources = ["rustc", "clippy"]
 name = "rust"
 source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "9c84af007b0f144954adb26b3f336495cbb320a7" }
 
-# JavaScript Configuration (using the same TypeScript Language Server)
+
+# JavaScript
 [[language]]
 name = "javascript"
 scope = "source.js"
@@ -36,7 +69,7 @@ shebangs = ["node"]
 block-comment-tokens = [
   { start = "/*", end = "*/" }
 ]
-language-servers = ["typescript-language-server"]
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
 indent = { tab-width = 2, unit = "  " }
 
 [[grammar]]
@@ -44,30 +77,53 @@ name = "javascript"
 source = { git = "https://github.com/tree-sitter/tree-sitter-javascript", rev = "f933a9a96a62f8dd5cd55544ae8d81f92a8df99b" }
 
 
+# TypeScript
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
 
-# HTML Configuration
+
+# React (JSX / TSX)
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+
+
+# HTML
 [[language]]
 name = "html"
 scope = "text.html.basic"
 file-types = ["html", "htm"]
-language-servers = ["vscode-html-language-server"]
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 
 [[grammar]]
 name = "html"
 source = { git = "https://github.com/tree-sitter/tree-sitter-html", rev = "fc20c54bdf37e34f091d81d173178c9540a02cf7" }
 
 
+# CSS
+[[language]]
+name = "css"
+scope = "source.css"
+file-types = ["css", "scss", "postcss"]
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
 
+[[grammar]]
+name = "css"
+source = { git = "https://github.com/tree-sitter/tree-sitter-css", rev = "95dcaa26dc6a4cf2f51a0d1bb40f19a46872da1b" }
+
+
+# Java
 [[language]]
 name = "java"
 scope = "source.java"
 file-types = ["java"]
-roots = [ ".git"]
+roots = [".git"]
 language-servers = ["jdtls"]
-
-[language-server.jdtls]
-command = "jdtls"
-args = ["-data", "$HOME/.cache/jdtls/workspace"]
 
 [[grammar]]
 name = "java"
@@ -75,11 +131,14 @@ source = { git = "https://github.com/tree-sitter/tree-sitter-java", rev = "9b707
 
 
 
+# Svelte
+[[language]]
+name = "svelte"
+scope = "source.svelte"
+file-types = ["svelte"]
+roots = ["package.json", "tailwind.config.js", "tsconfig.json", ".git"]
+language-servers = ["svelteserver","typescript-language-server", "tailwindcss-ls"]
 
-
-
-
-
-
-
-
+[[grammar]]
+name = "svelte"
+source = { git = "https://github.com/Himujjal/tree-sitter-svelte", rev = "ae7fc8360874e4a18ad47adcae22485bbff95dbf" }

@@ -1,0 +1,121 @@
+
+
+
+================================================
+
+✅ Modify the config   
+ //i have selected pixel_3a as vertual divide in Android studio 
+
+
+nano ~/.android/avd/Pixel_3a.avd/config.ini     
+Edit the file:
+
+hw.gpu.enabled=yes
+hw.gpu.mode=swiftshader_indirect
+snapshot.present=false
+fastboot.forceColdBoot=yes
+fastboot.forceFastBoot=no
+
+
+
+
+
+======================================================
+
+
+nano ~/.android/avd/Pixel_3a.avd/config.ini
+
+
+
+AvdId=Pixel_3a
+PlayStore.enabled=true
+abi.type=x86_64
+avd.ini.displayname=Pixel 3a
+avd.ini.encoding=UTF-8
+
+# Disk & partitions
+disk.dataPartition.size=6G
+
+# Boot settings
+fastboot.chosenSnapshotFile=
+fastboot.forceChosenSnapshotBoot=no
+fastboot.forceColdBoot=yes
+fastboot.forceFastBoot=no
+snapshot.present=false
+
+# Hardware features
+hw.accelerometer=yes
+hw.arc=false
+hw.audioInput=yes
+hw.battery=yes
+hw.camera.back=virtualscene
+hw.camera.front=emulated
+hw.cpu.arch=x86_64
+hw.cpu.ncore=4
+hw.dPad=no
+hw.device.hash2=MD5:e8d835f8d0c166597ebb04c123632114
+hw.device.manufacturer=Google
+hw.device.name=pixel_3a
+hw.gps=yes
+hw.gpu.enabled=yes
+hw.gpu.mode=swiftshader_indirect
+hw.gyroscope=yes
+hw.initialOrientation=portrait
+hw.keyboard=yes
+hw.lcd.density=440
+hw.lcd.height=2220
+hw.lcd.width=1080
+hw.mainKeys=no
+hw.ramSize=2048
+hw.sdCard=yes
+hw.sensors.light=yes
+hw.sensors.magnetic_field=yes
+hw.sensors.orientation=yes
+hw.sensors.pressure=yes
+hw.sensors.proximity=yes
+hw.trackBall=no
+
+# System image
+image.sysdir.1=system-images/android-36/google_apis_playstore/x86_64/
+
+# Network & runtime
+runtime.network.latency=none
+runtime.network.speed=full
+
+# SD card
+sdcard.size=512M
+
+# Skin / device frame
+showDeviceFrame=yes
+skin.dynamic=yes
+skin.name=pixel_3a
+skin.path=/home/suraj/Android/Sdk/skins/pixel_3a
+
+# Tags & target
+tag.display=Google Play
+tag.displaynames=Google Play
+tag.id=google_apis_playstore
+tag.ids=google_apis_playstore
+target=android-36
+
+# VM settings
+vm.heapSize=256
+
+
+
+
+
+
+=========================
+
+✅ What changed
+
+    hw.gpu.mode=swiftshader_indirect → stable software rendering
+
+    snapshot.present=false → no broken save states
+
+    fastboot.forceColdBoot=yes → always fresh boot
+
+    fastboot.forceFastBoot=no → disables snapshot fast boot
+
+==========================

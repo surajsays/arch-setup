@@ -1,0 +1,151 @@
+
+
+
+sudo pacman -Syu
+sudo pacman -S --needed \
+  webkit2gtk-4.1 \
+  base-devel \
+  curl \
+  wget \
+  file \
+  openssl \
+  appmenu-gtk-module \
+  libappindicator-gtk3 \
+  librsvg \
+  xdotool
+
+
+
+cargo install tauri-cli --locked  
+
+
+   Installed package `tauri-cli v2.8.3` (executable `cargo-tauri`)
+[suraj@archlinux ~]$ 
+
+
+cargo install create-tauri-app --locked
+
+
+
+cargo create-tauri-app
+
+cargo tauri dev
+
+
+cargo tauri android init
+
+rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
+
+
+
+
+
+
+rustup target add x86_64-linux-android
+rustup target add i686-linux-android
+rustup target add armv7-linux-androideabi
+rustup target add aarch64-linux-android
+
+
+
+
+
+//src-tauri/gen/android/app/build.gradle.kts
+
+
+android {
+    compileSdk = 36
+    namespace = "com.suraj.duck2"
+
+    defaultConfig {
+        manifestPlaceholders["usesCleartextTraffic"] = "false"
+        applicationId = "com.suraj.duck2"
+        minSdk = 24
+        targetSdk = 36
+        versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
+        versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
+
+        // ✅ Add ABI filters here
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cargo tauri android dev --open
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Perfect 👍 then the cleanest solution is to add x86_64 support to your build so your APK runs on the emulator you already have (Pixel 3a x86_64).
+
+Right now your APK only has armeabi-v7a, that’s why the emulator complains.
+
+✅ Fix without downloading new system images
+
+Install Rust x86 targets
+rustup target add x86_64-linux-android
+rustup target add i686-linux-android
+
+Edit android/app/build.gradle.kts
+
+
+android {
+    defaultConfig {
+        // existing stuff...
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+}
+
+
+
+
+cargo tauri android dev --open

@@ -1,0 +1,5 @@
+du -h -d1 /home | sort -h
+
+ du -h -d1 /home/suraj | sort -h
+
+sudo du -h -d1 / | sort -h

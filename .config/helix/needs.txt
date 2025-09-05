@@ -1,0 +1,30 @@
+echo 'export PATH=$HOME/.npm-global/bin:$PATH' >> ~/.bashrc
+
+
+
+
+npm install -g typescript typescript-language-server
+npm install -g vscode-langservers-extracted
+npm install -g @tailwindcss/language-server
+npm install -g svelte-language-server
+paru -S jdtls   # or yay -S jdtls
+
+ make sure you have above servers installed globally
+
+
+
+
+
+
+
+
+
+
+
+
+which tailwindcss-language-server
+
+
+
+If everything is correct, it should show something like:
+/home/suraj/.npm-global/bin/tailwindcss-language-server
