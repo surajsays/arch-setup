@@ -6,32 +6,27 @@ DIR="$HOME/Pictures/Wallpapers"
 # Predefined list of wallpapers
 WALLPAPERS=(
 nordic.png
-shinchan2.jpg
+train_and_lake_edited.png
+train-edited.png
 anime-girl-room-guitar.jpg
 my-neighbor-totoro-sunflowers.png
 dark_forest.png
+ign-waifu-edited.png
 Tanjiro.png
 seashore.jpg
 field.jpeg
-wallhaven-lmxwdl.jpg
 lofi-cafe_gray.jpg
 totoro.jpg
 0393.jpg
-interstellar_wallpaper.png
 train.jpg
 18.jpg
 totro2.jpg
-shinchan.jpg
-frame-13.png
-maxresdefault.jpg
 clouds.jpg
-hills.jpg
-train-custome.jpg
+arch-edited.png
 ign-waifu.png
 train_and_lake.png
+wallpaper8.png
 gruvbox_forest-4.png
-117497448_p0.jpg
-
 )
 
 # Show list in rofi
